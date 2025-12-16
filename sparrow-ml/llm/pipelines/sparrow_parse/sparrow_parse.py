@@ -32,7 +32,7 @@ def subprocess_inference(config, input_data, tables_only, crop_size, query_all_d
     Subprocess function to execute the inference logic.
     """
     from sparrow_parse.extractors.vllm_extractor import VLLMExtractor
-    from sparrow_parse.vllm.inference_factory import InferenceFactory
+    from .inference_factory import InferenceFactory
 
     # Initialize the extractor and inference instance
     factory = InferenceFactory(config)
@@ -76,7 +76,7 @@ class SparrowParsePipeline(Pipeline):
                      debug_dir: str = None,
                      debug: bool = False,
                      local: bool = True) -> Any:
-        print(f"\nRunning pipeline with {pipeline}\n")
+        print(f"\nRunning pipi with {pipeline}\n")
 
         start = timeit.default_timer()
 
@@ -337,6 +337,11 @@ class SparrowParsePipeline(Pipeline):
                 "model_name": options[1]
             }, tables_only, validation_off, apply_annotation
         elif method == 'ollama':
+            return {
+                "method": method,
+                "model_name": options[1]
+            }, tables_only, validation_off, apply_annotation
+        elif method == 'trt':
             return {
                 "method": method,
                 "model_name": options[1]
