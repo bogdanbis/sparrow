@@ -94,37 +94,24 @@ class TensorRTInference(ModelInference):
                     base64_image = base64.b64encode(f.read()).decode("utf-8")
 
                 # Make the multimodal request to TensorRT
-                # response = self.client.chat.completions.create(
-                #     model=self.model_name,
-                #     messages=[
-                #         {"role": "system", "content": "You are a helpful assitant."},
-                #         {
-                #             "role": "user", 
-                #             "content": [
-                #                 {"type": "text", "text": input_data[0]["text_input"]},
-                #                 {
-                #                     "type": "image_url",
-                #                     "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}
-                #                 },
-                #             ],
-                #         }
-                #     ],
-                #     max_completion_tokens=512,
-                #     temperature=0.0,
-                #     stop=["<|im_end|>", "</s>", "<|endoftext|>"],
-                # )
-                response = self.client.responses.create(
+                response = self.client.chat.completions.create(
                     model=self.model_name,
-                    input=[{
-                        "role": "user",
-                        "content": [
-                            {"type": "input_text", "text": input_data[0]["text_input"]},
-                            {
-                                "type": "input_image",
-                                "image_url": f"data:image/jpeg;base64,{base64_image}",
-                            }
-                        ]
-                    }]
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assitant."},
+                        {
+                            "role": "user", 
+                            "content": [
+                                {"type": "text", "text": input_data[0]["text_input"]},
+                                {
+                                    "type": "image_url",
+                                    "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}
+                                },
+                            ],
+                        }
+                    ],
+                    max_completion_tokens=256,
+                    temperature=0.0,
+                    stop=["<|im_end|>", "</s>", "<|endoftext|>"],
                 )
 
                 # Process the raw response
