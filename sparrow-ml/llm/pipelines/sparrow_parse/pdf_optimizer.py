@@ -40,7 +40,7 @@ class PDFOptimizer(object):
             return number_of_pages, output_files, temp_dir
         else:
             # Convert the PDF to images
-            images = convert_from_path(file_path, dpi=300)
+            images = convert_from_path(file_path, dpi=100)
             base_name = os.path.splitext(os.path.basename(file_path))[0]
 
             # Save the images to the temporary directory
