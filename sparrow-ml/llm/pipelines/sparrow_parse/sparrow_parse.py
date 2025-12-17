@@ -31,7 +31,7 @@ def subprocess_inference(config, input_data, tables_only, crop_size, query_all_d
     """
     Subprocess function to execute the inference logic.
     """
-    from sparrow_parse.extractors.vllm_extractor import VLLMExtractor
+    from .vllm_extractor import VLLMExtractor
     from .inference_factory import InferenceFactory
 
     # Initialize the extractor and inference instance
