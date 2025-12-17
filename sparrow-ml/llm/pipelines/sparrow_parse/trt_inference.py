@@ -128,7 +128,7 @@ class TensorRTInference(ModelInference):
                 # )
 
                 # Process the raw response
-                processed_response = self.process_response(response['message']['content'])
+                processed_response = self.process_response(response.choices[0].message.content)
 
                 results.append(processed_response)
                 print(f"Inference completed successfully for: {file_path}")
