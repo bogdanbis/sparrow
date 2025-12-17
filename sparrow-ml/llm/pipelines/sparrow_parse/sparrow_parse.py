@@ -76,7 +76,7 @@ class SparrowParsePipeline(Pipeline):
                      debug_dir: str = None,
                      debug: bool = False,
                      local: bool = True) -> Any:
-        print(f"\nRunning pipi with {pipeline}\n")
+        print(f"\nRunning pipeline with {pipeline}\n")
 
         start = timeit.default_timer()
 
