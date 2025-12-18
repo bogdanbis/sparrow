@@ -19,6 +19,9 @@ class InferenceFactory:
         elif self.config["method"] == "trt":
             from .trt_inference import TensorRTInference
             return TensorRTInference(model_name=self.config["model_name"])
+        elif self.config["method"] == "vllm":
+            from .vllm_inference import vLLMInference
+            return vLLMInference(model_name=self.config["model_name"])
         else:
             raise ValueError(f"Unknown method: {self.config['method']}")
 
