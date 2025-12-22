@@ -86,10 +86,7 @@ class TensorRTInference(ModelInference):
         else:
             # Image-based inference
             file_paths = self._extract_file_paths(input_data)
-            results = self._process_images(file_paths, input_data, apply_annotation, precision_callback)
-
-        file_paths = self._extract_file_paths(input_data)
-        results = self._process_images(file_paths, input_data)
+            results = self._process_images(file_paths, input_data)
 
         return results
 
@@ -113,9 +110,8 @@ class TensorRTInference(ModelInference):
             )
             # Process the raw response
             processed_response = self.process_response(response.choices[0].message.content)
-
-            results.append(processed_response)
             print(f"Inference completed successfully")
+            return processed_response
         except Exception as e:
             print(f"Error during text inference: {e}")
             raise
