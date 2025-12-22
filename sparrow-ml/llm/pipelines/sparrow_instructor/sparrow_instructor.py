@@ -160,7 +160,7 @@ class SparrowInstructorPipeline(Pipeline):
                 "method": method,
                 "model_name": options[1]
             }
-        elif method == 'ollama':
+        elif method == 'ollama' or method == 'trt' or method == 'vllm':
             return {
                 "method": method,
                 "model_name": options[1]
