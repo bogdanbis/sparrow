@@ -75,11 +75,50 @@ class TensorRTInference(ModelInference):
         
         apply_annotation = False
 
+        # Determine if we're doing text-only or image-based inference
+        is_text_only = input_data[0].get("file_path") is None
+
+        if is_text_only:
+            # Text-only inference
+            messages = input_data[0]["text_input"]
+            response = self._generate_text_response(messages)
+            results = [response]
+        else:
+            # Image-based inference
+            file_paths = self._extract_file_paths(input_data)
+            results = self._process_images(file_paths, input_data, apply_annotation, precision_callback)
+
         file_paths = self._extract_file_paths(input_data)
         results = self._process_images(file_paths, input_data)
 
         return results
 
+    def _generate_text_response(self, messages):
+        """
+        Generate a text response for text-only inputs.
+
+        :param messages: Input messages
+        :return: Generated response
+        """
+        results = []
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": messages
+                    }
+                ]
+            )
+            # Process the raw response
+            processed_response = self.process_response(response.choices[0].message.content)
+
+            results.append(processed_response)
+            print(f"Inference completed successfully")
+        except Exception as e:
+            print(f"Error during text inference: {e}")
+            raise
 
     def _process_images(self, file_paths, input_data):
         """
