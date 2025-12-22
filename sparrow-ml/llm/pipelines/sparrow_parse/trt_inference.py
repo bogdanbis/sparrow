@@ -7,15 +7,18 @@ import base64
 
 class TensorRTInference(ModelInference):
 
-    def __init__(self, model_name):
+    def __init__(self, model_name: str, url: str = "http://localhost:8355/v1"):
         """
         Initialize the inference class with the given model name.
 
         :param model_name: Name of the model to load.
         """
         self.model_name = model_name
-        self.client = OpenAI(base_url="http://localhost:8355/v1", api_key="not-neede")
+        self.client = OpenAI(base_url=url, api_key="not-needed")
         print(f"TensorRTInference initialized for model: {model_name}")
+
+    def set_url(self, url: str):
+        self.client = OpenAI(base_url=url, api_key="not-needed")
 
     def process_response(self, output_text):
         """

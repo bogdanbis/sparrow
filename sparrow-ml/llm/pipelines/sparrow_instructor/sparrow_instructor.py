@@ -22,12 +22,14 @@ def subprocess_inference(config, input_data, debug_dir, debug):
     """
     Subprocess function to execute the inference logic.
     """
-    from sparrow_parse.extractors.vllm_extractor import VLLMExtractor
-    from sparrow_parse.vllm.inference_factory import InferenceFactory
+    from ..sparrow_parse.vllm_extractor import VLLMExtractor
+    from ..sparrow_parse.inference_factory import InferenceFactory
 
     # Initialize the extractor and inference instance
     factory = InferenceFactory(config)
     model_inference_instance = factory.get_inference_instance()
+    if config["method"] == "trt":
+        model_inference_instance.set_url("http://localhost:8356/v1")
     extractor = VLLMExtractor()
 
     # Run inference

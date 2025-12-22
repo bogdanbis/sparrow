@@ -14,7 +14,7 @@ class vLLMInference(ModelInference):
         :param model_name: Name of the model to load.
         """
         self.model_name = model_name
-        self.client = OpenAI(base_url="http://localhost:8004/v1", api_key="not-neede")
+        self.client = OpenAI(base_url="http://localhost:8004/v1", api_key="not-needed")
         print(f"vLLM inference initialized for model: {model_name}")
 
     def process_response(self, output_text):
