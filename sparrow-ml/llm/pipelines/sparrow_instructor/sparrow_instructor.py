@@ -155,12 +155,7 @@ class SparrowInstructorPipeline(Pipeline):
                 "hf_space": options[1],
                 "hf_token": os.getenv('HF_TOKEN')  # Ensure HF_TOKEN is set in the environment
             }
-        elif method == 'mlx':
-            return {
-                "method": method,
-                "model_name": options[1]
-            }
-        elif method == 'ollama' or method == 'trt' or method == 'vllm':
+        elif method == 'mlx' or method == 'ollama' or method == 'trt' or method == 'vllm' or method == 'llamacpp':
             return {
                 "method": method,
                 "model_name": options[1]

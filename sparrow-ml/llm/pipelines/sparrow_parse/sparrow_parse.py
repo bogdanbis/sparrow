@@ -336,21 +336,6 @@ class SparrowParsePipeline(Pipeline):
                 "method": method,
                 "model_name": options[1]
             }, tables_only, validation_off, apply_annotation
-        # elif method == 'ollama':
-        #     return {
-        #         "method": method,
-        #         "model_name": options[1]
-        #     }, tables_only, validation_off, apply_annotation
-        # elif method == 'trt':
-        #     return {
-        #         "method": method,
-        #         "model_name": options[1]
-        #     }, tables_only, validation_off, apply_annotation
-        # elif method == 'vllm':
-        #     return {
-        #         "method": method,
-        #         "model_name": options[1]
-        #     }, tables_only, validation_off, apply_annotation
         else:
             # Extendable for additional backends
             print(f"Unsupported inference method: {method}")
