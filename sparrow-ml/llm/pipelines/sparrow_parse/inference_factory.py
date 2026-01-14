@@ -22,6 +22,9 @@ class InferenceFactory:
         elif self.config["method"] == "vllm":
             from .vllm_inference import vLLMInference
             return vLLMInference(model_name=self.config["model_name"])
+        elif self.config["method"] == "llamacpp":
+            from .llama_cpp_inference import LlamaCppInference
+            return LlamaCppInference(model_name=self.config["model_name"])
         else:
             raise ValueError(f"Unknown method: {self.config['method']}")
 
